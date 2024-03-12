@@ -1,0 +1,33 @@
+<svg width="8.5in" height="11in" viewBox="0 0 215.9 279.4" version="1.1" id="template5svg"
+	xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:svg="http://www.w3.org/2000/svg">
+	<g id="layer1" style="display:inline">
+		<rect style="fill:#ffffff;fill-rule:evenodd;stroke-width:0.640434" id="rect49134" width="215.89999" height="279.39999" x="-1.0468906e-06" y="0" />
+	</g>
+	<g id="layer11" style="display:inline">
+		<rect class="secondary-color" style="fill:#1f1410;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0687854" id="rect92802" width="215.89999" height="18.884222" x="-1.0468906e-06" y="260.51575" />
+	</g>
+	<g  id="layer8" style="display:inline">
+		<rect class="primary-color" style="fill:#059932;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.140721" id="rect49465" width="61.072926" height="279.39999" x="-1.0468906e-06" y="1.335144e-05" />
+	</g>
+	<g  id="layer9" style="display:inline">
+		<path class="secondary-color" style="fill:#1f1410;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 61.13064,84.578006 V 79.646615 H 28.81726 c -2.167193,-0.01378 -3.984927,0.204167 -5.241972,1.704042 -0.73319,0.874823 -1.459809,2.124364 -1.468897,4.180021 v 92.636302 c -0.0467,4.81086 3.220478,5.9638 6.579284,5.92136 H 61.055747 V 98.294488 H 216.05075 V 84.671052 Z" id="path78143" sodipodi:nodetypes="cccscccccccc" />
+	</g>
+	<g  id="layer12" >
+		<path class="tertiary-color" style="fill:none;stroke:#ff8632;stroke-width:0.49762;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 27.076127,113.67217 H 208.5141" id="path94303" sodipodi:nodetypes="cc" />
+		<path class="tertiary-color" style="fill:none;stroke:#ff8632;stroke-width:0.498661;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" d="M 26.703942,131.63219 H 208.32801" id="path94303-4" sodipodi:nodetypes="cc" />
+	</g>
+	<g  id="layer13" >
+		<path class="primary-color" style="display:inline;fill:#059932;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 141.80075,196.32031 c -3.46487,-0.28265 -4.30661,-2.09546 -4.83835,-4.08911 v -5.21053 c 0.4598,-2.3442 1.81902,-4.06572 5.48967,-4.18702 h 73.50564 l -0.0577,13.48666" id="path127454" sodipodi:nodetypes="cccccc" />
+	</g>
+	<g  id="layer10" >
+		<text class="primary-color" xml:space="preserve" style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;display:inline;fill:#059932;fill-opacity:1;stroke:none;stroke-width:0.264583" x="97.276871" y="19.583851" id="text53123-9">
+			<tspan class="primary-color" sodipodi:role="line" id="tspan53121-4" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'Franklin Gothic Demi Cond';-inkscape-font-specification:'Franklin Gothic Demi Cond';fill:#059932;fill-opacity:1;stroke-width:0.264583" x="97.276871" y="19.583851">FACTURA ELECTRÓNICA</tspan>
+		</text>
+		<path class="primary-color" style="fill:#059932;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 215.89999,196.32031 H 141.80075" id="path127200" sodipodi:nodetypes="cc" />
+		<path class="secondary-color-circle" style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 141.80075,196.32031 Z" id="path127448" />
+		<path style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 141.80075,196.32031 c 0,0 0,0 0,0 z" id="path127450" />
+		<path style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 141.80075,196.32031 Z" id="path127452" />
+	</g>
+</svg>

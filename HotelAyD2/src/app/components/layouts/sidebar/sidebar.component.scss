@@ -1,0 +1,15 @@
+.name-brand{
+	font-size: 1.5em !important;
+}
+
+.superposition-container {
+	position: relative;
+}
+
+.superposition-element {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	transform: scale(0.6);
+	color: gray;
+}
