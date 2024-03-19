@@ -1,0 +1,38 @@
+.pagination-controller {
+	padding: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+	background-color: var(--main-color);
+	color: white;
+}
+
+.info-controller {
+	text-align: center;
+}
+
+.controls {
+	display: flex;
+	justify-content: space-between;
+}
+
+.inactive {
+	opacity: 0.5;
+	color: gray;
+	pointer-events: none;
+}
+
+.active {
+	opacity: 1;
+	color: white;
+}
+
+.active:hover {
+	cursor: pointer;
+	filter: drop-shadow(2px 2px 2px skyblue);
+}
+
+select{
+	text-align: center;
+}

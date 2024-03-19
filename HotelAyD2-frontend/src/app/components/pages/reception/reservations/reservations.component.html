@@ -3,6 +3,54 @@
 		<h1>Reservaciones</h1>
 	</div>
 	<div class="card-body">
-		
+		<h5>Verificar disponibilidad</h5>
+		<div class="row">
+			<div class="col-sm">
+				<div class="form-group" style="margin-bottom: 1em;">
+					<label for="type" class="form-label">Tipo de habitación</label>
+					<select name="type" id="type" [(ngModel)]="roomType" (change)="filterRooms()" class="form-select">
+						<option *ngFor="let type of roomTypes | keyvalue" value="{{type.key}}">
+							{{type.value.room_type_name}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="form-group" style="margin-bottom: 1em;">
+					<label for="startDate" class="form-label">Fecha entrada</label>
+					<input type="date" name="startDate" [(ngModel)]="startDate" [max]="endDate" (change)="getRoomsAvailable()" id="endDate" class="form-control">
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="form-group" style="margin-bottom: 1em;">
+					<label for="endDate" class="form-label">Fecha salida</label>
+					<input type="date" name="endDate" [(ngModel)]="endDate" [min]="startDate" (change)="getRoomsAvailable()" id="endDate" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center">Código</th>
+						<th class="text-center">Nivel</th>
+						<th class="text-center">Tipo</th>
+						<th class="text-center">Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let room of pagination.filter" [class.occupied]="room.occupied">
+						<td class="text-center">{{room.room_code}}</td>
+						<td class="text-center">{{room.htl_level}}</td>
+						<td class="text-center">{{roomTypes[room.room_type_id].room_type_name}}</td>
+						<td class="text-center">
+							<i class="clickable text-info fa fa-eye"></i>
+							<i *ngIf="!room.occupied" class="clickable text-success fa fa-calendar-plus"></i>
+							<i *ngIf="room.occupied" class="clickable text-danger fa fa-calendar-xmark"></i>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<app-pagination [elements]="pagination"></app-pagination>
 	</div>
 </div>

@@ -1,0 +1,23 @@
+<div class="row pagination-controller" style="margin:0">
+	<div class="col">
+		<div class="input-group input-group-sm" *ngIf="elements.pageSize%5==0">
+			<label for="pageSize" class="input-group-text"><i class="fa fa-eye" style="color: var(--bs-bg-servicios)"></i></label>
+			<select name="pageSize" [(ngModel)]="elements.pageSize" (change)="changePageSize()" id="pageSize" class="form-select">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+		</div>
+	</div>
+	<div class="col info-controller">
+		<span>{{elements.filter.length==0?0:elements.startElement+1}} - {{elements.filter.length==0?0:elements.lastElement}} de {{elements.total.length}}</span>
+	</div>
+	<div class="col controls">
+		<i class="fa fa-angles-left" [ngClass]="elements.pageIndex==0?'inactive':'active'" (click)="start()"></i>
+		<i class="fa fa-chevron-left" [ngClass]="elements.pageIndex==0?'inactive':'active'" (click)="previous()"></i>
+		<i class="fa fa-chevron-right" [ngClass]="isOnLastPage()?'inactive':'active'" (click)="next()"></i>
+		<i class="fa fa-angles-right" [ngClass]="isOnLastPage()?'inactive':'active'" (click)="last()"></i>
+	</div>
+</div>

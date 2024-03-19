@@ -1,0 +1,9 @@
+.occupied > td {
+	background-color: #cfcfc4;
+	opacity: 0.5;
+	color: var(--bg-danger-color);
+}
+
+td {
+	background-color: var(--bg-success-color);
+}

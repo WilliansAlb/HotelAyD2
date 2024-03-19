@@ -8,6 +8,9 @@ import { HeaderComponent } from './components/layouts/header/header.component';
 import { ReceptionComponent } from './components/pages/reception/reception.component';
 import { ReservationsComponent } from './components/pages/reception/reservations/reservations.component';
 import { FooterComponent } from './components/layouts/footer/footer.component';
+import { RoomsComponent } from './components/pages/reception/rooms/rooms.component';
+import { PaginationComponent } from './components/elements/pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +19,15 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
     HeaderComponent,
     ReceptionComponent,
     ReservationsComponent,
-    FooterComponent
+    FooterComponent,
+    RoomsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
