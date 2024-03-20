@@ -47,6 +47,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   hideSidebar(){
-      return this.location.includes('authentication') || this.location.includes('not-authorized') || this.location.includes('error') || this.location.includes('select-company');
+      return this.location.includes('auth');
   }
 }

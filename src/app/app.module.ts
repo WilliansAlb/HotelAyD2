@@ -11,6 +11,10 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
 import { RoomsComponent } from './components/pages/reception/rooms/rooms.component';
 import { PaginationComponent } from './components/elements/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './security/auth.interceptor';
+import { LoginComponent } from './components/pages/auth/login/login.component';
+import { AuthComponent } from './components/pages/auth/auth.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,15 +25,22 @@ import { FormsModule } from '@angular/forms';
     ReservationsComponent,
     FooterComponent,
     RoomsComponent,
-    PaginationComponent
+    PaginationComponent,
+    LoginComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

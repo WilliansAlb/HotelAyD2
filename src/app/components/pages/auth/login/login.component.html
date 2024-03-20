@@ -1,0 +1,35 @@
+<div class="login-area">
+	<div class="d-table">
+		<div class="d-table-cell">
+			<div class="container">
+				<div class="screen">
+					<div class="screen__content">
+						<img class="logoImg" src="assets/img/HotelAyD2.png" alt="">
+						<div class="login">
+							<h3><b>AYD2 HOTEL</b></h3>
+							<div class="login__field">
+								<i class="login__icon fas fa-user"></i>
+								<input type="text" class="login__input" [(ngModel)]="newLogin.username" placeholder="User name / Email">
+							</div>
+							<div class="login__field">
+								<i class="login__icon fas fa-lock"></i>
+								<input type="password" class="login__input" [(ngModel)]="newLogin.password" placeholder="Password">
+							</div>
+							<button class="button login__submit" [disabled]="!newLogin.username || !newLogin.password" (click)="login()">
+								<span class="button__text">Entrar</span>
+								<i *ngIf="!loading" class="button__icon fas fa-chevron-right"></i>
+								<span *ngIf="loading" class="button__icon spinner-border spinner-border-sm"></span>
+							</button>				
+						</div>
+					</div>
+					<div class="screen__background">
+						<span class="screen__background__shape screen__background__shape3"></span>		
+						<span class="screen__background__shape screen__background__shape2"></span>
+						<span class="screen__background__shape screen__background__shape1"></span>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Login Area -->

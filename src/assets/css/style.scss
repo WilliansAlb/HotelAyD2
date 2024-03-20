@@ -7013,13 +7013,6 @@ Register CSS
                         cursor: pointer;
                         height: 0;
                         width: 0;
-
-                        &:checked ~ .checkmark {
-                            background-color: #2196F3;
-                        }
-                        &:checked ~ .checkmark:after {
-                            display: block;
-                        }
                     }
                     .checkmark {
                         position: absolute;
@@ -7028,7 +7021,6 @@ Register CSS
                         height: 18px;
                         width: 18px;
                         overflow: hidden;
-                        background-color: #eeeeee;
                         transition: $transition;
 
                         &:after {
