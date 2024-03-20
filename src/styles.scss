@@ -32,3 +32,41 @@ th {
 .table {
 	margin: 0;
 }
+
+.limit-col {
+	max-width: 1em;
+}
+
+
+
+.suggestions {
+	position: absolute;
+	max-height: 150px;
+	overflow-y: auto;
+	width: 100%;
+	z-index: 10000;
+	background-color: purple;
+  }
+  
+  
+  .suggestions-item {
+	padding: 8px;
+	cursor: pointer;
+	background-color: purple;
+	color: white;
+	font-size: 0.8em;
+  }
+  
+  .suggestions-item:hover {
+	background-color: #001f54;
+	color: white;
+  }
+  
+  app-input-autocomplete {
+	position: relative;
+	flex: 1 1 auto;
+	width: 1%;
+  }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

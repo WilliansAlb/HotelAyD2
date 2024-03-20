@@ -15,6 +15,14 @@ import { AuthInterceptor } from './security/auth.interceptor';
 import { LoginComponent } from './components/pages/auth/login/login.component';
 import { AuthComponent } from './components/pages/auth/auth.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ClientModalComponent } from './components/modals/client-modal/client-modal.component';
+import { SimpleModalComponent } from './components/modals/simple-modal/simple-modal.component';
+import { LoadingButtonComponent } from './components/elements/loading-button/loading-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatTabsModule} from '@angular/material/tabs';
+import { ReservationModalComponent } from './components/modals/reservation-modal/reservation-modal.component';
+import { InputAutocompleteComponent } from './components/elements/input-autocomplete/input-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +35,22 @@ import { ToastrModule } from 'ngx-toastr';
     RoomsComponent,
     PaginationComponent,
     LoginComponent,
-    AuthComponent
+    AuthComponent,
+    ClientModalComponent,
+    SimpleModalComponent,
+    LoadingButtonComponent,
+    ReservationModalComponent,
+    InputAutocompleteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    MatTabsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
