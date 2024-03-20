@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { AuthRequest } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = "http://localhost:8080/auth";
+  private url = `${environment.HTL_BACKEND_URL}/auth`;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {
+  }
 
   login(data: AuthRequest) {
     return this.http.post(this.url, data);
   }
 
   setToken(token: string) {
-    localStorage.setItem("jwt", token);
+    localStorage.setItem('jwt', token);
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
   }
 }

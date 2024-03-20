@@ -19,3 +19,17 @@ export interface RoomTypeResponse {
 	number_of_beds: number;
 	price: number;
 }
+
+export class RoomType {
+  public roomTypeId!: number;
+  public roomTypeName!: string;
+  public numberOfBeeds!: number;
+  public price!: number;
+}
+
+export class Room {
+  public roomId!: number;
+  public roomType!: RoomType;
+  public roomCode!: string;
+  public htlLevel!: number;
+}

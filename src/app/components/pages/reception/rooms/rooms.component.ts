@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RoomAvailableResponse, RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -21,9 +22,9 @@ export class RoomsComponent implements OnInit {
   roomTypes: {[key:number]:any} = {};
 
   constructor(
-    private roomService: RoomService
+    private roomService: RoomService,
+    private roomTypeService: RoomTypeService
   ) {
-
   }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class RoomsComponent implements OnInit {
   }
 
   getRoomTypes(){
-    this.roomService.getRoomTypes().subscribe(
+    this.roomTypeService.findAll().subscribe(
       {
         next: (response:RoomTypeResponse[]) => {
           this.roomTypes[0] = { room_type_id: 0, room_type_name: "Cualquiera"};
