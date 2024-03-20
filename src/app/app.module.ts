@@ -15,6 +15,8 @@ import { AuthInterceptor } from './security/auth.interceptor';
 import { LoginComponent } from './components/pages/auth/login/login.component';
 import { AuthComponent } from './components/pages/auth/auth.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RoomTypesListComponent } from './components/pages/reception/room-types/room-types-list/room-types-list.component';
+import { RoomTypesCrudComponent } from './components/pages/reception/room-types/room-types-crud/room-types-crud.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ToastrModule } from 'ngx-toastr';
     RoomsComponent,
     PaginationComponent,
     LoginComponent,
-    AuthComponent
+    AuthComponent,
+    RoomTypesListComponent,
+    RoomTypesCrudComponent
   ],
   imports: [
     BrowserModule,
