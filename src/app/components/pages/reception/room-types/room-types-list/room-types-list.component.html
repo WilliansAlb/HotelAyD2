@@ -1,1 +1,37 @@
-<p>room-types-list works!</p>
+<div class="card">
+  <div class="card-header">
+    <h1>Tipos de habitaciones</h1>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Precio</th>
+            <th class="text-center">N&uacute;mero de habitaciones</th>
+            <th class="text-center">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let type of pagination.filter">
+            <tr>
+              <td class="text-center">{{ type.room_type_name }}</td>
+              <td class="text-center">{{ type.price | currency: 'GTQ': 'Q': '.2': 'en' }}</td>
+              <td class="text-center">{{ type.number_of_beds }}</td>
+              <td class="text-center">
+                <button class="btn btn-outline-light">
+                  <i class="clickable text-info fa fa-eye"></i>
+                </button>
+                <button class="btn btn-outline-light">
+                  <i class="clickable fa-solid fa-pen-to-square"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <app-pagination [elements]="pagination"></app-pagination>
+  </div>
+</div>
