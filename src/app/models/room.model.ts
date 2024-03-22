@@ -23,7 +23,7 @@ export interface RoomTypeResponse {
 export class RoomType {
   public roomTypeId!: number;
   public roomTypeName!: string;
-  public numberOfBeeds!: number;
+  public numberOfBeds!: number;
   public price!: number;
 }
 

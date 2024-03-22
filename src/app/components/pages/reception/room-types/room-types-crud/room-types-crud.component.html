@@ -1,1 +1,73 @@
-<p>room-types-crud works!</p>
+<div class="card">
+  <div class="card-header">
+    <h1>Tipos de habitaciones</h1>
+  </div>
+  <div class="card-body" *ngIf="roomType">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <div class="mb-3">
+          <label>
+            <span class="text-danger fw-bolder">*</span>
+            Nombre
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            placeholder="Ej. Premium"
+            maxlength="75"
+            [(ngModel)]="roomType.roomTypeName"
+            #name="ngModel"
+            [ngClass]="{'is-invalid': name.touched && !roomType.roomTypeName}"
+          >
+          <div class="invalid-feedback">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <label>
+          <span class="text-danger fw-bolder">*</span>
+          N&uacute;mero de habitaciones
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          name="numberOfBeds"
+          placeholder="Ej. 3"
+          [(ngModel)]="roomType.numberOfBeds"
+          #numberOfBeds="ngModel"
+          [ngClass]="{'is-invalid': numberOfBeds.touched && !roomType.numberOfBeds}"
+        >
+        <div class="invalid-feedback">
+          Campo obligatorio
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="mb-3">
+          <label>
+            <span class="text-danger fw-bolder">*</span>
+            Precio
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            name="price"
+            placeholder="Ej. 250"
+            [(ngModel)]="roomType.price"
+            #roomPrice="ngModel"
+            [ngClass]="{'is-invalid': roomPrice.touched && !roomType.price}"
+          >
+          <div class="invalid-feedback">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-footer
+      [cancelRoute]="['/reception', 'rooms-types']"
+      (saveAction)="onSave()"
+    >
+    </app-footer>
+  </div>
+</div>

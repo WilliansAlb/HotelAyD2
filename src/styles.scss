@@ -1,72 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
 .breadcrumb-area {
-	margin: 10px;
+  margin: 10px;
 }
 
-$primary-color: #001f54;
+$primary-color: #00307e;
 
 :root {
-	--bg-danger-color: #ff6961;
-	--bg-success-color: #C1E1C1;
-	--main-color: #001f54;
+  --bg-danger-color: #ff6961;
+  --bg-success-color: #C1E1C1;
+  --main-color: #001f54;
 }
 
 .card {
-	margin: 10px;
+  margin: 10px;
 }
 
 th {
-	background-color: var(--main-color) !important;
-	color: white !important;
+  background-color: var(--main-color) !important;
+  color: white !important;
+}
+
+.btn-primary {
+  background: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    background: #002246 !important;
+    border-color: #002246 !important;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $primary-color;
+  color: $primary-color;
+
+  &:hover {
+    background: #002246 !important;
+    border-color: #002246 !important;
+  }
 }
 
 .clickable {
-	opacity: 0.5;
-	cursor: pointer;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .clickable:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .table {
-	margin: 0;
+  margin: 0;
 }
 
 .limit-col {
-	max-width: 1em;
+  max-width: 1em;
 }
 
-
-
 .suggestions {
-	position: absolute;
-	max-height: 150px;
-	overflow-y: auto;
-	width: 100%;
-	z-index: 10000;
-	background-color: purple;
-  }
-  
-  
-  .suggestions-item {
-	padding: 8px;
-	cursor: pointer;
-	background-color: purple;
-	color: white;
-	font-size: 0.8em;
-  }
-  
-  .suggestions-item:hover {
-	background-color: #001f54;
-	color: white;
-  }
-  
-  app-input-autocomplete {
-	position: relative;
-	flex: 1 1 auto;
-	width: 1%;
-  }
+  position: absolute;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 10000;
+  background-color: purple;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.suggestions-item {
+  padding: 8px;
+  cursor: pointer;
+  background-color: purple;
+  color: white;
+  font-size: 0.8em;
+}
+
+.suggestions-item:hover {
+  background-color: #001f54;
+  color: white;
+}
+
+app-input-autocomplete {
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

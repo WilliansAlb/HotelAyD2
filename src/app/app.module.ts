@@ -7,7 +7,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/layouts/header/header.component';
 import { ReceptionComponent } from './components/pages/reception/reception.component';
 import { ReservationsComponent } from './components/pages/reception/reservations/reservations.component';
-import { FooterComponent } from './components/layouts/footer/footer.component';
 import { RoomsComponent } from './components/pages/reception/rooms/rooms.component';
 import { PaginationComponent } from './components/elements/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ReservationModalComponent } from './components/modals/reservation-modal/reservation-modal.component';
 import { InputAutocompleteComponent } from './components/elements/input-autocomplete/input-autocomplete.component';
+import { FooterComponent } from './components/elements/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { InputAutocompleteComponent } from './components/elements/input-autocomp
     SimpleModalComponent,
     LoadingButtonComponent,
     ReservationModalComponent,
-    InputAutocompleteComponent
+    InputAutocompleteComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
