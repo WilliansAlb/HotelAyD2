@@ -26,7 +26,4 @@ export class AuthInterceptor implements HttpInterceptor {
 		return next.handle(request);
 	}
 
-	supports(method: string, url: string): boolean {
-		return true;
-	}
 }

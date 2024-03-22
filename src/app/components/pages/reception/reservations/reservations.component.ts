@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ReservationRequest } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -22,7 +23,9 @@ export class ReservationsComponent implements OnInit {
     pageIndex: 0
   };
   roomType = 0;
-
+  clientModal = false;
+  newReservation: ReservationRequest = new ReservationRequest();
+  reservationModal = false;
 
   constructor(
     private roomService: RoomService
@@ -83,5 +86,23 @@ export class ReservationsComponent implements OnInit {
     paginationTemp.lastElement = paginationTemp.pageSize;
     paginationTemp.filter = paginationTemp.total.slice(paginationTemp.startElement, paginationTemp.lastElement);
     paginationTemp.lastElement = paginationTemp.filter.length;
+  }
+
+  closeClientModal(element){
+    console.log(element);
+    this.clientModal = false;
+  }
+
+  closeReservationModal(element){
+    console.log(element);
+    this.reservationModal = false;
+  }
+
+  createReservation(room: RoomResponse){
+    this.newReservation = new ReservationRequest();
+    this.newReservation.room_id = room.room_id;
+    this.newReservation.reservation_from = this.startDate;
+    this.newReservation.reservation_until = this.endDate;
+    this.reservationModal = true;
   }
 }

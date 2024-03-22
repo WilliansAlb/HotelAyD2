@@ -1,0 +1,42 @@
+<app-simple-modal [title]="'Reservación'" (close)="close.emit($event)">
+	<div fields>
+		<div class="row">
+			<div class="col form-group" >
+				<label for="room_id" class="form-label">Habitación</label>
+				<div style="position: relative;">
+					<input type="text" disabled id="room_id" name="room_id" class="fa form-control">
+					<span class="data-room"><i class="fa fa-bed"></i> {{dataRoom.beds}} - {{dataRoom.code}} - {{dataRoom.type}} - {{dataRoom.price | currency:'Q'}}</span>
+				</div>
+			</div>
+			<div class="col form-group" >
+				<label for="reservation_from" class="form-label">Reservación desde</label>
+				<input type="text" disabled value="{{reservation.reservation_from}}" id="reservation_from" name="reservation_from" class="form-control">
+			</div>
+			<div class="col form-group" >
+				<label for="reservation_until" class="form-label">Reservación hasta</label>
+				<input type="text" disabled value="{{reservation.reservation_until}}" id="reservation_until" name="reservation_until" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col form-group">
+				<label for="client" class="form-label">Cliente <i class="fa fa-asterisk text-danger"></i></label>
+				<div class="input-group">
+					<app-input-autocomplete [filterElements]="clients" [totalElements]="clients" [allBorderRadius]="true"
+						[typeElements]="'client'" [configuration]="configuration" (create)="clientModal = true" (getTitle)="$event.filterElement.title = $event.filterElement.identification_no+' '+$event.filterElement.first_name + ' '+$event.filterElement.last_name" [placeholder]="'Ingresa un cliente'"></app-input-autocomplete>
+				</div>
+			</div>
+			<div class="col form-group">
+				<label for="pay" class="form-label">Pago Total de Reserva</label>
+				<div class="input-group">
+					<label for="pay" class="input-group-text">Q</label>
+					<input type="number" name="pay" id="pay" value="100.00" disabled class="form-control">	
+				</div>
+				<p class="form-text"><i class="fa fa-circle-info"></i> Se debe de abonar cómo mínimo un 30%</p>
+			</div>
+		</div>
+	</div>
+	<div buttons>
+		<app-loading-button [object]="buttonPay" [disabled]="reservation.getDisabled()" (clicked)="acceptReservation()"></app-loading-button>
+	</div>
+</app-simple-modal>
+<app-client-modal *ngIf="clientModal" (close)="closeClientModal($event)"></app-client-modal>

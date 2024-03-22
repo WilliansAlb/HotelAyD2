@@ -1,0 +1,37 @@
+<app-simple-modal [title]="'Cliente'" (close)="close.emit($event)">
+	<div fields>
+		<div class="row">
+			<div class="col form-group" >
+				<label for="identification_no" class="form-label">Identificacion <i  class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.identification_no" id="identification_no" placeholder="Ingresa el número de Identificacion" name="identification_no" class="form-control">
+			</div>
+			<div class="col form-group">
+				<label for="first_name" class="form-label">Primer Nombre <i class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.first_name" id="first_name" name="first_name" placeholder="Ingresa el primer nombre" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col form-group">
+				<label for="middle_name" class="form-label">Segundo nombre <i class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.middle_name" id="middle_name" name="middle_name" placeholder="Ingresa el segundo nombre" class="form-control">
+			</div>
+			<div class="col form-group">
+				<label for="last_name" class="form-label">Apellido <i class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.last_name" id="last_name" name="last_name" placeholder="Ingresa el apellido" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col form-group">
+				<label for="email" class="form-label">Email <i class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.email" id="email" name="email" placeholder="Ingresa el correo" class="form-control">
+			</div>
+			<div class="col form-group">
+				<label for="phone_number" class="form-label">Número de Teléfono <i class="fa fa-asterisk text-danger"></i></label>
+				<input type="text" [(ngModel)]="client.phone_number" id="phone_number" name="phone_number" placeholder="Ingresa el número de teléfono" class="form-control">
+			</div>
+		</div>
+	</div>
+	<div buttons>
+		<app-loading-button [object]="buttonSave" [disabled]="client.getDisabled()" (clicked)="saveClient()"></app-loading-button>
+	</div>
+</app-simple-modal>

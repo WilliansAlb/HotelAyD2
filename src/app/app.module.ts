@@ -17,6 +17,14 @@ import { AuthComponent } from './components/pages/auth/auth.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RoomTypesListComponent } from './components/pages/reception/room-types/room-types-list/room-types-list.component';
 import { RoomTypesCrudComponent } from './components/pages/reception/room-types/room-types-crud/room-types-crud.component';
+import { ClientModalComponent } from './components/modals/client-modal/client-modal.component';
+import { SimpleModalComponent } from './components/modals/simple-modal/simple-modal.component';
+import { LoadingButtonComponent } from './components/elements/loading-button/loading-button.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ReservationModalComponent } from './components/modals/reservation-modal/reservation-modal.component';
+import { InputAutocompleteComponent } from './components/elements/input-autocomplete/input-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +39,22 @@ import { RoomTypesCrudComponent } from './components/pages/reception/room-types/
     LoginComponent,
     AuthComponent,
     RoomTypesListComponent,
-    RoomTypesCrudComponent
+    RoomTypesCrudComponent,
+    ClientModalComponent,
+    SimpleModalComponent,
+    LoadingButtonComponent,
+    ReservationModalComponent,
+    InputAutocompleteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    MatTabsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -47,4 +63,5 @@ import { RoomTypesCrudComponent } from './components/pages/reception/room-types/
   }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
