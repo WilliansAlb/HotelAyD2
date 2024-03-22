@@ -3,54 +3,96 @@
 		<h1>Reservaciones</h1>
 	</div>
 	<div class="card-body">
-		<h5>Verificar disponibilidad</h5>
-		<div class="row">
-			<div class="col-sm">
-				<div class="form-group" style="margin-bottom: 1em;">
-					<label for="type" class="form-label">Tipo de habitación</label>
-					<select name="type" id="type" [(ngModel)]="roomType" (change)="filterRooms()" class="form-select">
-						<option *ngFor="let type of roomTypes | keyvalue" value="{{type.key}}">
-							{{type.value.room_type_name}}</option>
-					</select>
+		<mat-tab-group>
+			<mat-tab label="Listado de Reservaciones"> 
+				<p class="text-muted text-center mt-1"><i class="fa fa-circle-info"></i> Se muestran todas las reservaciones realizadas</p>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th rowspan="2" class="text-center align-middle">Estado</th>
+								<th rowspan="2" class="text-center align-middle">Cliente</th>
+								<th rowspan="2" class="text-center align-middle">Habitación</th>
+								<th rowspan="2" class="text-center align-middle">Creada</th>
+								<th rowspan="1" colspan="2" class="text-center">Reservación</th>
+								<th rowspan="2" class="text-center align-middle">Check-In</th>
+								<th rowspan="2" class="text-center align-middle">Check-Out</th>
+								<th rowspan="2" class="text-center align-middle">Creado Por</th>
+								<th rowspan="2" class="text-center align-middle">Opciones</th>
+							</tr>
+							<tr>
+								<th class="text-center align-middle">Desde</th>
+								<th class="text-center align-middle">Hasta</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let room of pagination.filter" [class.occupied]="room.occupied">
+								<td class="text-center">{{room.room_code}}</td>
+								<td class="text-center">{{room.htl_level}}</td>
+								<td class="text-center">{{roomTypes[room.room_type_id].room_type_name}}</td>
+								<td class="text-center">
+									<i class="clickable text-info fa fa-eye"></i>
+									<i *ngIf="!room.occupied" class="clickable text-success fa fa-calendar-plus"></i>
+									<i *ngIf="room.occupied" class="clickable text-danger fa fa-calendar-xmark"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-			<div class="col-sm">
-				<div class="form-group" style="margin-bottom: 1em;">
-					<label for="startDate" class="form-label">Fecha entrada</label>
-					<input type="date" name="startDate" [(ngModel)]="startDate" [max]="endDate" (change)="getRoomsAvailable()" id="endDate" class="form-control">
+			</mat-tab>
+			<mat-tab label="Verificar disponibilidad">
+				<h5>Verificar disponibilidad</h5>
+				<div class="row">
+					<div class="col-sm">
+						<div class="form-group" style="margin-bottom: 1em;">
+							<label for="type" class="form-label">Tipo de habitación</label>
+							<select name="type" id="type" [(ngModel)]="roomType" (change)="filterRooms()"
+								class="form-select">
+								<option *ngFor="let type of roomTypes | keyvalue" value="{{type.key}}">
+									{{type.value.room_type_name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm">
+						<div class="form-group" style="margin-bottom: 1em;">
+							<label for="startDate" class="form-label">Fecha entrada</label>
+							<input type="date" name="startDate" [(ngModel)]="startDate" [max]="endDate"
+								(change)="getRoomsAvailable()" id="endDate" class="form-control">
+						</div>
+					</div>
+					<div class="col-sm">
+						<div class="form-group" style="margin-bottom: 1em;">
+							<label for="endDate" class="form-label">Fecha salida</label>
+							<input type="date" name="endDate" [(ngModel)]="endDate" [min]="startDate"
+								(change)="getRoomsAvailable()" id="endDate" class="form-control">
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="col-sm">
-				<div class="form-group" style="margin-bottom: 1em;">
-					<label for="endDate" class="form-label">Fecha salida</label>
-					<input type="date" name="endDate" [(ngModel)]="endDate" [min]="startDate" (change)="getRoomsAvailable()" id="endDate" class="form-control">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="text-center">Código</th>
+								<th class="text-center">Nivel</th>
+								<th class="text-center">Tipo</th>
+								<th class="text-center limit-col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let room of pagination.filter" [class.occupied]="room.occupied">
+								<td class="text-center">{{room.room_code}}</td>
+								<td class="text-center">{{room.htl_level}}</td>
+								<td class="text-center">{{roomTypes[room.room_type_id].room_type_name}}</td>
+								<td class="text-center limit-col">
+									<i matTooltip="Reservar" (click)="createReservation(room)" class="clickable text-danger fa fa-calendar-plus"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-		</div>
-		<div class="table-responsive">
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<th class="text-center">Código</th>
-						<th class="text-center">Nivel</th>
-						<th class="text-center">Tipo</th>
-						<th class="text-center">Opciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let room of pagination.filter" [class.occupied]="room.occupied">
-						<td class="text-center">{{room.room_code}}</td>
-						<td class="text-center">{{room.htl_level}}</td>
-						<td class="text-center">{{roomTypes[room.room_type_id].room_type_name}}</td>
-						<td class="text-center">
-							<i class="clickable text-info fa fa-eye"></i>
-							<i *ngIf="!room.occupied" class="clickable text-success fa fa-calendar-plus"></i>
-							<i *ngIf="room.occupied" class="clickable text-danger fa fa-calendar-xmark"></i>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<app-pagination [elements]="pagination"></app-pagination>
+				<app-pagination [elements]="pagination"></app-pagination>
+			</mat-tab>
+		</mat-tab-group>
 	</div>
 </div>
+<app-reservation-modal *ngIf="reservationModal" [roomTypes]="roomTypes" [reservation]="newReservation" (close)="closeReservationModal($event)"></app-reservation-modal>
