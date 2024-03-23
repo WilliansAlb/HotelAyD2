@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Room, RoomTypeResponse } from 'src/app/models/room.model';
@@ -33,6 +34,31 @@ export class RoomsCrudComponent implements OnInit {
     });
   }
 
+  compareWith = (roomType: RoomTypeResponse, selectedRoomType: RoomTypeResponse) => {
+    return roomType.room_type_id == selectedRoomType.room_type_id;
+  }
+
   onSave() {
+    if (!this.curRoomType || !this.room.roomCode || !this.room.htlLevel) {
+      return window.alert('formulario invalido');
+    }
+
+    this.roomTypeService.findById(this.curRoomType.room_type_id)
+      .subscribe({
+        next: (response) => {
+          this.room.roomType = response;
+
+          this.roomService.save(this.room).subscribe({
+            next: _ => {
+              window.alert('Cambios guardados con éxito');
+              void this.router.navigate(['/reception', 'rooms']);
+            },
+            error: (e: HttpErrorResponse) => {
+              console.error(e);
+            }
+          })
+        },
+        error: _ => window.alert("error en el servidor, intente mas tarde")
+      });
   }
 }

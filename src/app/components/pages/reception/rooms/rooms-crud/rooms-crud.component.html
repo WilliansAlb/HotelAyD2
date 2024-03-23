@@ -43,6 +43,32 @@
           Campo obligatorio
         </div>
       </div>
+      <div class="col-12 col-lg-6">
+        <label>
+          <span class="text-danger fw-bolder">*</span>
+          Tipo de habitaci&oacute;n
+        </label>
+        <ng-select
+          placeholder="Seleccione un tipo de habitación"
+          name="roomType"
+          [(ngModel)]="curRoomType"
+          [compareWith]="compareWith"
+          [ngClass]="{'is-invalid': roomType.touched && !curRoomType}"
+          #roomType="ngModel"
+          required
+        >
+          <ng-container *ngFor="let roomType of roomTypes">
+            <ng-option
+              [value]="roomType"
+            >
+              {{ roomType.room_type_name }}
+            </ng-option>
+          </ng-container>
+        </ng-select>
+        <div class="invalid-feedback">
+          Campo obligatorio
+        </div>
+      </div>
     </div>
     <app-footer
       [cancelRoute]="['/reception', 'rooms']"
