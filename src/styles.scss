@@ -1,3 +1,5 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 /* You can add global styles to this file, and also import other style files */
 .breadcrumb-area {
   margin: 10px;
@@ -92,4 +94,11 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// custom ng-select
+.default-select-height.ng-select.ng-select-single .ng-select-container  {
+  min-height: 38px;
+  max-height: 38px;
+  height: 38px;
 }

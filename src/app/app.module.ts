@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/layouts/sidebar/sidebar.component';
@@ -57,7 +58,8 @@ import { RoomsCrudComponent } from './components/pages/reception/rooms/rooms-cru
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MatTooltipModule,
-    MatTabsModule
+    MatTabsModule,
+    NgSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

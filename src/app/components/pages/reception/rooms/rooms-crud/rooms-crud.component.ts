@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Room, RoomType, RoomTypeResponse } from 'src/app/models/room.model';
+import { Room, RoomTypeResponse } from 'src/app/models/room.model';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -29,7 +29,7 @@ export class RoomsCrudComponent implements OnInit {
       next: (response) => {
         this.roomTypes = response ?? [];
       },
-      error: _ => window.alert("Something went wrong")
+      error: _ => window.alert('Something went wrong')
     });
   }
 
