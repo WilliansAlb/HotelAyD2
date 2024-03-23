@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Habitaciones</h1>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <div class="mb-3">
+          <label>
+            <span class="text-danger fw-bolder">*</span>
+            C&oacute;digo
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            name="code"
+            placeholder="Ej. AB-1"
+            [(ngModel)]="room.roomCode"
+            #code="ngModel"
+            [ngClass]="{'is-invalid': code.touched && !room.roomCode}"
+            [maxLength]="20"
+          >
+          <div class="invalid-feedback">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <label>
+          <span class="text-danger fw-bolder">*</span>
+          Nivel
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          name="level"
+          placeholder="Ej. 3"
+          [(ngModel)]="room.htlLevel"
+          #level="ngModel"
+          [ngClass]="{'is-invalid': level.touched && !room.htlLevel}"
+        >
+        <div class="invalid-feedback">
+          Campo obligatorio
+        </div>
+      </div>
+    </div>
+    <app-footer
+      [cancelRoute]="['/reception', 'rooms']"
+      (saveAction)="onSave()"
+    >
+    </app-footer>
+  </div>
+</div>

@@ -6,9 +6,10 @@ import {
 import {
   RoomTypesListComponent
 } from 'src/app/components/pages/reception/room-types/room-types-list/room-types-list.component';
+import { RoomsCrudComponent } from 'src/app/components/pages/reception/rooms/rooms-crud/rooms-crud.component';
 import { ReceptionComponent } from './components/pages/reception/reception.component';
 import { ReservationsComponent } from './components/pages/reception/reservations/reservations.component';
-import { RoomsComponent } from './components/pages/reception/rooms/rooms.component';
+import { RoomsComponent } from 'src/app/components/pages/reception/rooms/rooms/rooms.component';
 import { authGuard } from './security/auth.guard';
 import { LoginComponent } from './components/pages/auth/login/login.component';
 import { AuthComponent } from './components/pages/auth/auth.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
     children: [
       { path: 'reservations', data: { breadcrumb: 'Reservaciones' }, component: ReservationsComponent },
       { path: 'rooms', data: { breadcrumb: 'Habitaciones' }, component: RoomsComponent },
+      { path: 'rooms/create', data: { breadcrumb: 'Agregar habitación' }, component: RoomsCrudComponent },
       { path: 'rooms-types', data: { breadcrumb: 'Tipos de habitaciones' }, component: RoomTypesListComponent },
       { path: `rooms-types/:roomTypeId`, data: { breadcrumb: 'Tipos de habitaciones' }, component: RoomTypesCrudComponent },
     ]
