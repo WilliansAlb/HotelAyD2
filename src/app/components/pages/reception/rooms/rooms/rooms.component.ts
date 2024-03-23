@@ -59,7 +59,8 @@ export class RoomsComponent implements OnInit {
               number: element.room_code,
               level: element.htl_level,
               type: element.room_type_id,
-              availableDate: this.getRandomDate(startDate, endDate)
+              availableDate: this.getRandomDate(startDate, endDate),
+              room_id: element.room_id
             });
             this.rooms.sort(this.sortRoomsByAvailability)
             this.pagination.total = this.rooms;

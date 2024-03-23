@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ReservationRequest } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class ReservationsComponent implements OnInit {
   reservationModal = false;
 
   constructor(
-    private roomService: RoomService
+    private roomService: RoomService,
+    private roomTypeService: RoomTypeService
   ) {
 
     var today = new Date();
@@ -42,7 +44,7 @@ export class ReservationsComponent implements OnInit {
   }
 
   getRoomTypes() {
-    this.roomService.getRoomTypes().subscribe(
+    this.roomTypeService.findAll().subscribe(
       {
         next: (response: RoomTypeResponse[]) => {
           this.roomTypes[0] = { room_type_id: 0, room_type_name: "Cualquiera" };

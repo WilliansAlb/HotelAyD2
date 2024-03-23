@@ -25,15 +25,26 @@
 						</td>
 						<td class="text-center">{{room.number}}</td>
 						<td class="text-center">{{room.level}}</td>
-						<td class="text-center">{{roomTypes[room.type].room_type_name}}</td>
+						<td class="text-center" *ngIf="roomTypes[room.type]">{{roomTypes[room.type].room_type_name}}</td>
 						<td class="text-center">
 							<span *ngIf="room.occupied">{{room.availableDate | date:'yyyy-MM-dd HH:mm'}}</span>
 							<span *ngIf="!room.occupied">Libre</span>
 						</td>
 						<td class="text-center">
-							<i class="clickable text-info fa fa-eye"></i>
-							<i *ngIf="!room.occupied" class="clickable text-success fa fa-calendar-plus"></i>
-							<i *ngIf="room.occupied" class="clickable text-danger fa fa-calendar-xmark"></i>
+              <div class="d-flex gap-1 justify-content-center">
+                <button class="btn btn-outline-light">
+                  <i class="clickable text-info fa fa-eye"></i>
+                </button>
+                <button class="btn btn-outline-light" [routerLink]="['edit', room.room_id]">
+                  <i class="clickable fa-solid fa-pen-to-square"></i>
+                </button>
+                <button *ngIf="!room.occupied" class="btn btn-outline-light">
+                  <i class="clickable text-success fa fa-calendar-plus"></i>
+                </button>
+                <button *ngIf="room.occupied" class="btn btn-outline-light">
+                  <i class="clickable text-danger fa fa-calendar-xmark"></i>
+                </button>
+              </div>
 						</td>
 					</tr>
 				</tbody>

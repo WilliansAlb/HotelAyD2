@@ -7,6 +7,7 @@ import { ClientRequest } from 'src/app/models/client.model';
 import { InputAutocompleteConfiguration } from 'src/app/models/input-autocomplete.model';
 import { ReservationRequest } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -33,6 +34,7 @@ export class ReservationModalComponent implements OnInit{
 
   constructor(
     private roomService: RoomService,
+    private roomTypeService: RoomTypeService,
     private toastService: ToastrService
   ){
     for (let i = 0; i < 10; i++) {
@@ -52,7 +54,7 @@ export class ReservationModalComponent implements OnInit{
   }
 
   getRoomTypes(){
-    this.roomService.getRoomTypes().subscribe({
+    this.roomTypeService.findAll().subscribe({
       next: (response: RoomTypeResponse[])=>{
         response.forEach((room)=>{
           this.roomTypes[room.room_type_id] = room;

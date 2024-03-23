@@ -23,8 +23,9 @@ const routes: Routes = [
       { path: 'reservations', data: { breadcrumb: 'Reservaciones' }, component: ReservationsComponent },
       { path: 'rooms', data: { breadcrumb: 'Habitaciones' }, component: RoomsComponent },
       { path: 'rooms/create', data: { breadcrumb: 'Agregar habitación' }, component: RoomsCrudComponent },
+      { path: 'rooms/edit/:roomId', data: { breadcrumb: 'Editar habitación' }, component: RoomsCrudComponent },
       { path: 'rooms-types', data: { breadcrumb: 'Tipos de habitaciones' }, component: RoomTypesListComponent },
-      { path: `rooms-types/:roomTypeId`, data: { breadcrumb: 'Tipos de habitaciones' }, component: RoomTypesCrudComponent },
+      { path: `rooms-types/edit/:roomTypeId`, data: { breadcrumb: 'Tipos de habitaciones' }, component: RoomTypesCrudComponent },
     ]
   },
   {

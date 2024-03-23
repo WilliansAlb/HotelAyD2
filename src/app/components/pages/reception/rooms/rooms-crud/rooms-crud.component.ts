@@ -12,9 +12,10 @@ import { RoomService } from 'src/app/services/room.service';
 })
 export class RoomsCrudComponent implements OnInit {
 
+  roomId!: number;
+  room: Room;
   roomTypes: RoomTypeResponse[] = [];
   curRoomType!: RoomTypeResponse;
-  room: Room;
 
   constructor(
     private roomService: RoomService,
@@ -26,11 +27,31 @@ export class RoomsCrudComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.roomTypeService.findAll().subscribe({
-      next: (response) => {
-        this.roomTypes = response ?? [];
-      },
-      error: _ => window.alert('Something went wrong')
+    this.route.paramMap.subscribe({
+      next: params => {
+        this.roomId = Number(params.get('roomId') ?? 0);
+
+        this.roomTypeService.findAll().subscribe({
+          next: (response) => {
+            this.roomTypes = response ?? [];
+            if (!this.roomId) return;
+
+            this.roomService.findById(this.roomId).subscribe({
+              next: response => {
+                this.room = response;
+                // find room type
+                this.curRoomType = this.roomTypes
+                  .find(type => type.room_type_id == this.room.roomType.roomTypeId);
+              },
+              error: _ => {
+                window.alert("error en el servidor")
+                void this.router.navigate(['/reception', 'rooms']);
+              }
+            });
+          },
+          error: _ => window.alert('Something went wrong')
+        });
+      }
     });
   }
 
@@ -58,7 +79,7 @@ export class RoomsCrudComponent implements OnInit {
             }
           })
         },
-        error: _ => window.alert("error en el servidor, intente mas tarde")
+        error: _ => window.alert('error en el servidor, intente mas tarde')
       });
   }
 }

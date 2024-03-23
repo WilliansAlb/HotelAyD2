@@ -12,12 +12,12 @@ export class RoomService {
   constructor(private http: HttpClient) {
   }
 
-  getRooms() {
-    return this.http.get(this.URL);
+  findById(roomId) {
+    return this.http.get<Room>(`${this.URL}/${roomId}`);
   }
 
-  getRoomTypes() {
-    return this.http.get(this.URL + '/types');
+  getRooms() {
+    return this.http.get(this.URL);
   }
 
   getRoomAvailables(startDate, endDate) {
