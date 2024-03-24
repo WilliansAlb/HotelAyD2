@@ -13,3 +13,20 @@
 	transform: scale(0.6);
 	color: gray;
 }
+
+.sidemenu-area .sidemenu-header .navbar-brand .name-brand{
+	max-width: 100px;
+	white-space: break-spaces;
+	display: flex;
+	flex-direction: column;
+}
+
+.part1 {
+	font-size: 22px;
+    color: #001f54 !important;
+}
+
+.part2 {
+	font-size: 17px;
+    color: #152b5285 !important;
+}

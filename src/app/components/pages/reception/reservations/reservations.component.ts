@@ -1,9 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ReservationRequest } from 'src/app/models/reservation.model';
+import { ToastrService } from 'ngx-toastr';
+import { MessageEnum } from 'src/app/enums/message.enum';
+import { ReservationRequest, ReservationResponse } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { SimpleList } from 'src/app/models/simple-list';
 import { RoomTypeService } from 'src/app/services/room-type.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -17,6 +20,16 @@ export class ReservationsComponent extends SimpleList implements OnInit {
   endDate = "";
   rooms: RoomResponse[] = [];
 
+  reservations: ReservationResponse[] = [];
+
+  paginationReservations = {
+    total: [],
+    filter: [],
+    pageSize: 5,
+    startElement: 0,
+    lastElement: 0,
+    pageIndex: 0
+  };
   roomType = 0;
   clientModal = false;
   newReservation: ReservationRequest = new ReservationRequest();
@@ -24,7 +37,9 @@ export class ReservationsComponent extends SimpleList implements OnInit {
 
   constructor(
     private roomService: RoomService,
-    private roomTypeService: RoomTypeService
+    private roomTypeService: RoomTypeService,
+    private reservationService: ReservationService,
+    private toastService: ToastrService
   ) {
     super();
     const today = new Date();
@@ -48,7 +63,7 @@ export class ReservationsComponent extends SimpleList implements OnInit {
           this.getRoomsAvailable();
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
         }
       });
   }
@@ -59,11 +74,26 @@ export class ReservationsComponent extends SimpleList implements OnInit {
         next: (response: RoomResponse[]) => {
           this.rooms = response;
           this.filterRooms();
+          this.reservationService.getReservations().subscribe(
+            {
+              next: (response:ReservationResponse[]) => {
+                this.reservations = response;
+                this.filterReservations();
+              },
+              error: (error: HttpErrorResponse) => {
+                this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
+              }
+            });
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         }
       });
+  }
+
+  filterReservations(){
+    this.paginationReservations.total = this.reservations;
+    this.resetPagination(this.paginationReservations);
   }
 
   filterRooms(){

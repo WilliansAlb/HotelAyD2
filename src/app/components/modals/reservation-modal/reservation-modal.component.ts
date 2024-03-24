@@ -4,11 +4,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Actions } from 'src/app/enums/actions.enum';
 import { MessageEnum } from 'src/app/enums/message.enum';
 import { ButtonLoading } from 'src/app/models/button-loading.model';
-import { ClientRequest } from 'src/app/models/client.model';
+import { ClientResponse } from 'src/app/models/client.model';
 import { InputAutocompleteConfiguration } from 'src/app/models/input-autocomplete.model';
-import { ReservationRequest } from 'src/app/models/reservation.model';
+import { ReservationRequest, ReservationResponse } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { RoomTypeService } from 'src/app/services/room-type.service';
+import { ClientService } from 'src/app/services/client.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -21,7 +23,7 @@ export class ReservationModalComponent implements OnInit{
   @Input() reservation: ReservationRequest = new ReservationRequest();
   buttonPay: ButtonLoading = new ButtonLoading("btn-success",false,"RESERVAR","fa-money-bill-wave");
   @Output() close = new EventEmitter<any>();
-  clients: ClientRequest[] = [];
+  clients: ClientResponse[] = [];
   configuration: InputAutocompleteConfiguration = new InputAutocompleteConfiguration("fa-asterisk",true,false,true,"");
   clientModal = false;
   @Input() roomTypes: { [key: number]: any } = {};
@@ -30,28 +32,23 @@ export class ReservationModalComponent implements OnInit{
     beds: 0,
     code: "A",
     type: "Junior",
-    price: 100.00
+    price: 100.00,
+    total: 0,
+    min: 0
   }
 
   constructor(
     private roomService: RoomService,
     private roomTypeService: RoomTypeService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private clientService: ClientService,
+    private reservationService: ReservationService
   ){
-    for (let i = 0; i < 10; i++) {
-      var temp = new ClientRequest();
-      temp.email = "email"+i+"@gmail.com";
-      temp.first_name = "primer nombre "+i;
-      temp.identification_no = "283204"+i+"8181007";
-      temp.last_name = "apellido "+i;
-      temp.middle_name = "segundo nombre "+i;
-      temp.phone_number = "3498"+i+"0838";
-      this.clients.push(temp);
-    }
   }
 
   ngOnInit(): void {
     this.getRoomTypes();
+    this.getClients();
   }
 
   getRoomTypes(){
@@ -68,6 +65,17 @@ export class ReservationModalComponent implements OnInit{
     })
   }
 
+  getClients(){
+    this.clientService.getClients().subscribe({
+      next: (response: ClientResponse[])=>{
+        this.clients = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastService.error("Error al obtener las habitaciones");
+      }
+    })
+  }
+
   getRooms(){
     this.roomService.getRooms().subscribe({
       next: (response: RoomResponse[])=>{
@@ -78,6 +86,12 @@ export class ReservationModalComponent implements OnInit{
         this.dataRoom.type = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].room_type_name;
         this.dataRoom.beds = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].number_of_beds;
         this.dataRoom.price = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].price;
+        this.reservation.price = this.dataRoom.price;
+        this.dataRoom.total = this.dataRoom.price * this.countDaysBetweenDates(
+          new Date(this.reservation.reservation_from),
+          new Date(this.reservation.reservation_until));
+        this.dataRoom.min = this.dataRoom.total * 0.3;
+        this.reservation.payment = this.dataRoom.min;
       },
       error: (error: HttpErrorResponse) => {
         this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
@@ -85,11 +99,36 @@ export class ReservationModalComponent implements OnInit{
     })
   }
 
-  acceptReservation(){
+  countDaysBetweenDates(date1, date2) {
+    // Convert both dates to milliseconds
+    const date1Ms = date1.getTime();
+    const date2Ms = date2.getTime();
 
+    // Calculate the difference in milliseconds
+    const timeDifferenceMs = Math.abs(date2Ms - date1Ms);
+
+    // Convert the difference from milliseconds to days
+    const daysDifference = Math.ceil(timeDifferenceMs / (1000 * 60 * 60 * 24));
+
+    return daysDifference;
+}
+
+  acceptReservation(){
+    this.buttonPay.loading = true;
+    this.reservation.entry_date = (new Date()).toISOString().split('T')[0];
+    this.reservationService.saveNewReservation(this.reservation).subscribe({
+      next: (response: ReservationResponse)=>{
+        console.log(response);
+        this.buttonPay.loading = false;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastService.error("Error al guardar las habitaciones");
+        this.buttonPay.loading = false;
+      }
+    })
   }
 
-  closeClientModal(client:ClientRequest){
+  closeClientModal(client:ClientResponse){
     if (!client){
       console.log("nada");
     } else {

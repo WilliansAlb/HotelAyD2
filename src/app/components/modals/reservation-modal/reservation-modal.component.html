@@ -22,16 +22,24 @@
 				<label for="client" class="form-label">Cliente <i class="fa fa-asterisk text-danger"></i></label>
 				<div class="input-group">
 					<app-input-autocomplete [filterElements]="clients" [totalElements]="clients" [allBorderRadius]="true"
-						[typeElements]="'client'" [configuration]="configuration" (create)="clientModal = true" (getTitle)="$event.filterElement.title = $event.filterElement.identification_no+' '+$event.filterElement.first_name + ' '+$event.filterElement.last_name" [placeholder]="'Ingresa un cliente'"></app-input-autocomplete>
+						[typeElements]="'client'" [configuration]="configuration"
+						(select)="reservation.client_id = $event.filterElement.client_id" (create)="clientModal = true" (getTitle)="$event.filterElement.title = $event.filterElement.identification_no+' '+$event.filterElement.first_name + ' '+$event.filterElement.last_name" [placeholder]="'Ingresa un cliente'"></app-input-autocomplete>
 				</div>
 			</div>
 			<div class="col form-group">
 				<label for="pay" class="form-label">Pago Total de Reserva</label>
 				<div class="input-group">
 					<label for="pay" class="input-group-text">Q</label>
-					<input type="number" name="pay" id="pay" value="100.00" disabled class="form-control">	
+					<input type="number" name="pay" id="pay" value="{{dataRoom.total}}" disabled class="form-control">	
 				</div>
-				<p class="form-text"><i class="fa fa-circle-info"></i> Se debe de abonar cómo mínimo un 30%</p>
+				<p class="form-text"><i class="fa fa-circle-info"></i> Se debe de abonar cómo mínimo un 30% -> <b>{{dataRoom.min | currency: "Q"}}</b></p>
+			</div>
+			<div class="col form-group">
+				<label for="pay" class="form-label">Abono</label>
+				<div class="input-group">
+					<label for="pay" class="input-group-text">Q</label>
+					<input type="number" name="pay" id="pay" [(ngModel)]="reservation.payment" (change)="reservation.payment = reservation.payment < dataRoom.min? dataRoom.min: reservation.payment" min="{{dataRoom.min}}" class="form-control">	
+				</div>
 			</div>
 		</div>
 	</div>
