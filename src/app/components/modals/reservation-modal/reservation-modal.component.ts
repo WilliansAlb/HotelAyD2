@@ -5,9 +5,10 @@ import { Actions } from 'src/app/enums/actions.enum';
 import { ButtonLoading } from 'src/app/models/button-loading.model';
 import { ClientRequest, ClientResponse } from 'src/app/models/client.model';
 import { InputAutocompleteConfiguration } from 'src/app/models/input-autocomplete.model';
-import { ReservationRequest } from 'src/app/models/reservation.model';
+import { ReservationRequest, ReservationResponse } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { ClientService } from 'src/app/services/client.service';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -37,7 +38,8 @@ export class ReservationModalComponent implements OnInit{
   constructor(
     private roomService: RoomService,
     private toastService: ToastrService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private reservationService: ReservationService
   ){
   }
 
@@ -81,6 +83,7 @@ export class ReservationModalComponent implements OnInit{
         this.dataRoom.type = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].room_type_name;
         this.dataRoom.beds = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].number_of_beds;
         this.dataRoom.price = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].price;
+        this.reservation.price = this.dataRoom.price;
         this.dataRoom.total = this.dataRoom.price * this.countDaysBetweenDates(
           new Date(this.reservation.reservation_from), 
           new Date(this.reservation.reservation_until));
@@ -108,7 +111,18 @@ export class ReservationModalComponent implements OnInit{
 }
 
   acceptReservation(){
-
+    this.buttonPay.loading = true;
+    this.reservation.entry_date = (new Date()).toISOString().split('T')[0];
+    this.reservationService.saveNewReservation(this.reservation).subscribe({
+      next: (response: ReservationResponse)=>{
+        console.log(response);
+        this.buttonPay.loading = false;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastService.error("Error al guardar las habitaciones");
+        this.buttonPay.loading = false;
+      }
+    })
   }
 
   closeClientModal(client:ClientResponse){

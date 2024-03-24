@@ -18,4 +18,12 @@ export class ClientService {
   saveClient(newClient:ClientRequest){
     return this.http.post(this.url, newClient);
   }
+
+  getClientAccounts(){
+    return this.http.get(this.url + "/accounts");
+  }
+
+  getClientAccount(clientId:number){
+    return this.http.get(this.url + "/accounts/"+clientId);
+  }
 }

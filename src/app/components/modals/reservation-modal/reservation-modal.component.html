@@ -22,7 +22,8 @@
 				<label for="client" class="form-label">Cliente <i class="fa fa-asterisk text-danger"></i></label>
 				<div class="input-group">
 					<app-input-autocomplete [filterElements]="clients" [totalElements]="clients" [allBorderRadius]="true"
-						[typeElements]="'client'" [configuration]="configuration" (create)="clientModal = true" (getTitle)="$event.filterElement.title = $event.filterElement.identification_no+' '+$event.filterElement.first_name + ' '+$event.filterElement.last_name" [placeholder]="'Ingresa un cliente'"></app-input-autocomplete>
+						[typeElements]="'client'" [configuration]="configuration"
+						(select)="reservation.client_id = $event.filterElement.client_id" (create)="clientModal = true" (getTitle)="$event.filterElement.title = $event.filterElement.identification_no+' '+$event.filterElement.first_name + ' '+$event.filterElement.last_name" [placeholder]="'Ingresa un cliente'"></app-input-autocomplete>
 				</div>
 			</div>
 			<div class="col form-group">

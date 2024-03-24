@@ -26,15 +26,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let room of pagination.filter" [class.occupied]="room.occupied">
-								<td class="text-center">{{room.room_code}}</td>
-								<td class="text-center">{{room.htl_level}}</td>
-								<td class="text-center">{{roomTypes[room.room_type_id].room_type_name}}</td>
-								<td class="text-center">
-									<i class="clickable text-info fa fa-eye"></i>
-									<i *ngIf="!room.occupied" class="clickable text-success fa fa-calendar-plus"></i>
-									<i *ngIf="room.occupied" class="clickable text-danger fa fa-calendar-xmark"></i>
-								</td>
+							<tr *ngFor="let reservation of paginationReservations.filter">
+								<td class="text-center">{{reservation.status}}</td>
+								<td class="text-center">{{reservation.clientId}}</td>
+								<td class="text-center">{{reservation.roomId}}</td>
+								<td class="text-center">{{reservation.entryDate}}</td>
+								<td class="text-center">{{reservation.reservationFrom}}</td>
+								<td class="text-center">{{reservation.reservationUntil}}</td>
+								<td class="text-center">{{reservation.checkInDate}}</td>
+								<td class="text-center">{{reservation.checkOutDate}}</td>
+								<td class="text-center">{{reservation.creatorUserId}}</td>
+								<td class="text-center"><i class="fa fa-ban"></i></td>
 							</tr>
 						</tbody>
 					</table>

@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ReservationRequest } from 'src/app/models/reservation.model';
+import { ToastrService } from 'ngx-toastr';
+import { ReservationRequest, ReservationResponse } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { ReservationService } from 'src/app/services/reservation.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -14,7 +16,16 @@ export class ReservationsComponent implements OnInit {
   startDate = "";
   endDate = "";
   rooms: RoomResponse[] = [];
+  reservations: ReservationResponse[] = [];
   pagination = {
+    total: [],
+    filter: [],
+    pageSize: 5,
+    startElement: 0,
+    lastElement: 0,
+    pageIndex: 0
+  };
+  paginationReservations = {
     total: [],
     filter: [],
     pageSize: 5,
@@ -28,7 +39,9 @@ export class ReservationsComponent implements OnInit {
   reservationModal = false;
 
   constructor(
-    private roomService: RoomService
+    private roomService: RoomService,
+    private reservationService: ReservationService,
+    private toastService: ToastrService
   ) {
 
     var today = new Date();
@@ -63,11 +76,26 @@ export class ReservationsComponent implements OnInit {
         next: (response: RoomResponse[]) => {
           this.rooms = response;
           this.filterRooms();
+          this.reservationService.getReservations().subscribe(
+            {
+              next: (response:ReservationResponse[]) => {
+                this.reservations = response;
+                this.filterReservations();
+              },
+              error: (error: HttpErrorResponse) => {
+                this.toastService.error("Error al obtener las reservaciones");
+              }
+            });
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         }
       });
+  }
+
+  filterReservations(){
+    this.paginationReservations.total = this.reservations;
+    this.resetPagination(this.paginationReservations);
   }
 
   filterRooms(){
