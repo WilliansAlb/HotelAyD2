@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -55,6 +56,7 @@ import { RoomsCrudComponent } from './components/pages/reception/rooms/rooms-cru
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    CommonModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     MatTooltipModule,

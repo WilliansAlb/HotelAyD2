@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Room, RoomTypeResponse } from 'src/app/models/room.model';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
+import { MessageEnum } from 'src/app/enums/message.enum';
 
 @Component({
   selector: 'app-rooms-crud',
@@ -21,7 +23,8 @@ export class RoomsCrudComponent implements OnInit {
     private roomService: RoomService,
     private roomTypeService: RoomTypeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {
     this.room = new Room();
   }
@@ -43,13 +46,18 @@ export class RoomsCrudComponent implements OnInit {
                 this.curRoomType = this.roomTypes
                   .find(type => type.room_type_id == this.room.roomType.roomTypeId);
               },
-              error: _ => {
-                window.alert("error en el servidor")
-                void this.router.navigate(['/reception', 'rooms']);
+              error: (e: HttpErrorResponse) => {
+                if (e.status == 404) {
+                  this.toastService.error(MessageEnum.MSG_DEFAULT_404);
+                  void this.router.navigate(['/reception', 'rooms']);
+                  return;
+                }
+
+                this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
               }
             });
           },
-          error: _ => window.alert('Something went wrong')
+          error: _ => this.toastService.error(MessageEnum.MSG_ERROR_SERVER)
         });
       }
     });
@@ -59,9 +67,10 @@ export class RoomsCrudComponent implements OnInit {
     return roomType.room_type_id == selectedRoomType.room_type_id;
   }
 
-  onSave() {
+  onSave(): void {
     if (!this.curRoomType || !this.room.roomCode || !this.room.htlLevel) {
-      return window.alert('formulario invalido');
+      this.toastService.warning(MessageEnum.MSG_INVALID_FORM);
+      return;
     }
 
     this.roomTypeService.findById(this.curRoomType.room_type_id)
@@ -71,15 +80,15 @@ export class RoomsCrudComponent implements OnInit {
 
           this.roomService.save(this.room).subscribe({
             next: _ => {
-              window.alert('Cambios guardados con éxito');
+              this.toastService.success(MessageEnum.MSG_CHANGES_SAVED)
               void this.router.navigate(['/reception', 'rooms']);
             },
             error: (e: HttpErrorResponse) => {
-              console.error(e);
+              this.toastService.error(MessageEnum.MSG_ERROR_SERVER)
             }
           })
         },
-        error: _ => window.alert('error en el servidor, intente mas tarde')
+        error: _ => this.toastService.error(MessageEnum.MSG_ERROR_SERVER)
       });
   }
 }

@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MessageEnum } from 'src/app/enums/message.enum';
 import { RoomType } from 'src/app/models/room.model';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 
@@ -16,7 +19,8 @@ export class RoomTypesCrudComponent implements OnInit {
   constructor(
     private roomTypeService: RoomTypeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService
   ) {
     this.roomType = new RoomType();
   }
@@ -34,8 +38,14 @@ export class RoomTypesCrudComponent implements OnInit {
           next: (response) => {
             this.roomType = response;
           },
-          error: _ => {
-            console.log('error');
+          error: (e: HttpErrorResponse) => {
+            if (e.status == 404) {
+              this.toastService.error(MessageEnum.MSG_DEFAULT_404)
+              void this.router.navigate(['/reception', 'rooms-types']);
+              return;
+            }
+
+            this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
           }
         });
       }
@@ -44,18 +54,16 @@ export class RoomTypesCrudComponent implements OnInit {
 
   onSave() {
     if (!this.roomType.roomTypeName || !this.roomType.price || !this.roomType.numberOfBeds) {
-      window.alert('formulario invalido');
+      this.toastService.warning(MessageEnum.MSG_INVALID_FORM);
       return;
     }
 
     this.roomTypeService.update(this.roomType).subscribe({
       next: (response) => {
-        window.alert('Cambios guardados con éxito');
+        this.toastService.success(MessageEnum.MSG_CHANGES_SAVED);
         void this.router.navigate(['/reception', 'rooms-types']);
       },
-      error: _ => {
-        window.alert('Error en el servidor, intente mas tarde');
-      }
+      error: _ => this.toastService.error(MessageEnum.MSG_ERROR_SERVER)
     });
   }
 }

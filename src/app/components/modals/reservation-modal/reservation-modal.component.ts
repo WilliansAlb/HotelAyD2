@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Actions } from 'src/app/enums/actions.enum';
+import { MessageEnum } from 'src/app/enums/message.enum';
 import { ButtonLoading } from 'src/app/models/button-loading.model';
 import { ClientRequest } from 'src/app/models/client.model';
 import { InputAutocompleteConfiguration } from 'src/app/models/input-autocomplete.model';
@@ -62,7 +63,7 @@ export class ReservationModalComponent implements OnInit{
         this.getRooms();
       },
       error: (error: HttpErrorResponse) => {
-        this.toastService.error("Error al obtener las habitaciones");
+        this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
       }
     })
   }
@@ -79,7 +80,7 @@ export class ReservationModalComponent implements OnInit{
         this.dataRoom.price = this.roomTypes[this.rooms[this.reservation.room_id].room_type_id].price;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastService.error("Error al obtener las habitaciones");
+        this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
       }
     })
   }

@@ -16,23 +16,23 @@ export class LoginComponent {
   loading = false;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private toastService: ToastrService
-  ){
+  ) {
   }
 
-  login(){
+  login() {
     this.loading = true;
     this.authService.login(this.newLogin).subscribe({
-      next: (response:AuthResponse)=>{
+      next: (response: AuthResponse) => {
         console.log(response.token);
         this.authService.setToken(response.token);
-        this.router.navigate(['']);
+        void this.router.navigate(['']);
         this.loading = false;
       },
-      error: (error:HttpErrorResponse) => {
-        this.toastService.error("Error al ingresar");
+      error: (error: HttpErrorResponse) => {
+        this.toastService.error("Credenciales invalidas");
         this.loading = false;
       }
     })

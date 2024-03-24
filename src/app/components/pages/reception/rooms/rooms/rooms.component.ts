@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { MessageEnum } from 'src/app/enums/message.enum';
 import { RoomAvailableResponse, RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { SimpleList } from 'src/app/models/simple-list';
 import { RoomTypeService } from 'src/app/services/room-type.service';
@@ -16,7 +18,8 @@ export class RoomsComponent extends SimpleList implements OnInit {
 
   constructor(
     private roomService: RoomService,
-    private roomTypeService: RoomTypeService
+    private roomTypeService: RoomTypeService,
+    private toastService: ToastrService
   ) {
     super();
   }
@@ -36,7 +39,7 @@ export class RoomsComponent extends SimpleList implements OnInit {
           });
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
         }
       });
   }
@@ -62,8 +65,7 @@ export class RoomsComponent extends SimpleList implements OnInit {
           });
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
-
+          this.toastService.error(MessageEnum.MSG_ERROR_SERVER);
         }
       });
   }
