@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { RoomAvailableResponse, RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -21,7 +22,8 @@ export class RoomsComponent implements OnInit {
   roomTypes: {[key:number]:any} = {};
 
   constructor(
-    private roomService: RoomService
+    private roomService: RoomService,
+    private toastService: ToastrService
   ) {
 
   }
@@ -41,7 +43,7 @@ export class RoomsComponent implements OnInit {
           });
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
+          this.toastService.error("Error al obtener los tipos de habitaciones");
         }
       });
   }
@@ -66,8 +68,7 @@ export class RoomsComponent implements OnInit {
           });
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
-
+          this.toastService.error("Error al obtener las habitaciones");
         }
       });
   }
