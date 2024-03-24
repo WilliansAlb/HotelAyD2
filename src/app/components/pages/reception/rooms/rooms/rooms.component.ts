@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RoomAvailableResponse, RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { SimpleList } from 'src/app/models/simple-list';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -9,22 +10,15 @@ import { RoomService } from 'src/app/services/room.service';
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss']
 })
-export class RoomsComponent implements OnInit {
+export class RoomsComponent extends SimpleList implements OnInit {
   rooms: any[] = [];
-  pagination = {
-    total: [],
-    filter: [],
-    pageSize: 5,
-    startElement: 0,
-    lastElement: 0,
-    pageIndex: 0
-  };
   roomTypes: {[key:number]:any} = {};
 
   constructor(
     private roomService: RoomService,
     private roomTypeService: RoomTypeService
   ) {
+    super();
   }
 
   ngOnInit(): void {
@@ -72,14 +66,6 @@ export class RoomsComponent implements OnInit {
 
         }
       });
-  }
-
-  resetPagination(paginationTemp) {
-    paginationTemp.startElement = 0;
-    paginationTemp.pageIndex = 0;
-    paginationTemp.lastElement = paginationTemp.pageSize;
-    paginationTemp.filter = paginationTemp.total.slice(paginationTemp.startElement, paginationTemp.lastElement);
-    paginationTemp.lastElement = paginationTemp.filter.length;
   }
 
   sortRoomsByAvailability(a: RoomAvailableResponse, b: RoomAvailableResponse): number {

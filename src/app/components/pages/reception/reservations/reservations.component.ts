@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ReservationRequest } from 'src/app/models/reservation.model';
 import { RoomResponse, RoomTypeResponse } from 'src/app/models/room.model';
+import { SimpleList } from 'src/app/models/simple-list';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -10,19 +11,12 @@ import { RoomService } from 'src/app/services/room.service';
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.scss']
 })
-export class ReservationsComponent implements OnInit {
+export class ReservationsComponent extends SimpleList implements OnInit {
   roomTypes: { [key: number]: any } = {};
   startDate = "";
   endDate = "";
   rooms: RoomResponse[] = [];
-  pagination = {
-    total: [],
-    filter: [],
-    pageSize: 5,
-    startElement: 0,
-    lastElement: 0,
-    pageIndex: 0
-  };
+
   roomType = 0;
   clientModal = false;
   newReservation: ReservationRequest = new ReservationRequest();
@@ -32,8 +26,8 @@ export class ReservationsComponent implements OnInit {
     private roomService: RoomService,
     private roomTypeService: RoomTypeService
   ) {
-
-    var today = new Date();
+    super();
+    const today = new Date();
     this.startDate = (today).toISOString().split("T")[0];
     today.setDate(today.getDate() + 1);
     this.endDate = (today).toISOString().split("T")[0];
@@ -80,14 +74,6 @@ export class ReservationsComponent implements OnInit {
       });
     }
     this.resetPagination(this.pagination);
-  }
-
-  resetPagination(paginationTemp) {
-    paginationTemp.startElement = 0;
-    paginationTemp.pageIndex = 0;
-    paginationTemp.lastElement = paginationTemp.pageSize;
-    paginationTemp.filter = paginationTemp.total.slice(paginationTemp.startElement, paginationTemp.lastElement);
-    paginationTemp.lastElement = paginationTemp.filter.length;
   }
 
   closeClientModal(element){
