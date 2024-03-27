@@ -28,6 +28,9 @@ import { ReservationModalComponent } from './components/modals/reservation-modal
 import { InputAutocompleteComponent } from './components/elements/input-autocomplete/input-autocomplete.component';
 import { FooterComponent } from './components/elements/footer/footer.component';
 import { RoomsCrudComponent } from './components/pages/reception/rooms/rooms-crud/rooms-crud.component';
+import { FoodCrudComponent } from './components/pages/restaurant/food/food-crud/food-crud.component';
+import { FoodListComponent } from './components/pages/restaurant/food/food-list/food-list.component';
+import { RestaurantDashboardComponent } from './components/pages/restaurant/restaurant-dashboard/restaurant-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { RoomsCrudComponent } from './components/pages/reception/rooms/rooms-cru
     ReservationModalComponent,
     InputAutocompleteComponent,
     FooterComponent,
-    RoomsCrudComponent
+    RoomsCrudComponent,
+    FoodCrudComponent,
+    FoodListComponent,
+    RestaurantDashboardComponent
   ],
   imports: [
     BrowserModule,

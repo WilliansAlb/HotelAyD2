@@ -19,11 +19,13 @@
 	</div>
 	<div class="sidemenu-body">
 		<ul class="sidemenu-nav metisMenu h-100" id="sidemenu-nav" data-simplebar>
+      <!--
 			<li class="nav-item-title">
 				Recepción
 			</li>
+			-->
 			<li class="nav-item" routerLinkActive="active mm-active">
-				<a href="#" class="collapsed-nav-link nav-link" aria-expanded="false">
+				<a role="button" class="collapsed-nav-link nav-link" aria-expanded="false">
 					<span class="icon"><i class='fa-solid fa-bed'></i></span>
 					<span class="menu-title">Habitaciones</span>
 					<!-- <span class="badge">3</span> -->
@@ -85,6 +87,26 @@
 					</li>
 				</ul>
 			</li>
+      <li class="nav-item" routerLinkActive="active mm-active">
+        <a role="button" class="collapsed-nav-link nav-link" aria-expanded="false">
+          <span class="icon"><i class="fa-solid fa-utensils"></i></span>
+          <span class="menu-title">Restaurante</span>
+          <!-- <span class="badge">3</span> -->
+        </a>
+        <ul class="sidemenu-nav-second-level">
+          <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/restaurant/food" class="nav-link">
+              <span class="icon">
+                <span class="superposition-container">
+                  <i class="fa-solid fa-bowl-food"></i>
+                  <i class="fa-solid fa-mug-saucer superposition-element"></i>
+                </span>
+              </span>
+              <span class="menu-title">Comidas y bebidas</span>
+            </a>
+          </li>
+        </ul>
+      </li>
 		</ul>
 	</div>
 </div>
